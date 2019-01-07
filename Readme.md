@@ -53,7 +53,8 @@ C:\oit\java-bash.bat
 ## 開発(学生の立場から)の流れ
 ### Javaファイルの編集・コンパイル・実行
 #### vscodeの起動及びファイル編集
-- `C:\oit\VSCodePortable_1.XX.Y\VSCodePortable.exe`を起動する
+- `C:\oit\VSCode-win32-x64-1.29.1\Code.exe`を起動する
+  - ターミナルを開き，codeコマンドを実行する
 - ファイル->フォルダを開く->「`$HOME\kadai\javaYY`」フォルダを指定する
 - 例えば`lec01\Work11.java`を開いて適当に編集する
 
@@ -115,13 +116,16 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 ```
 
+- settings.jsonファイルを開き，ユーザー設定タブを選択する．``"update.channel": "none"``を追加する．
+  - C:\oit\VSCode-win32-x64-1.XX.Y\data\user-data\User\settings.jsonファイルが編集される．
+
 ## Step4. VS Code設定
 - 自動整形設定やjava.homeの設定(settings.jsonに追記）
   - https://qiita.com/maron8676/items/017cd830ab0c5fb8bcac
 
 ### Step5. 不要なフォルダを削除
 - 「C:\oit\VSCode-win32-x64-1.XX.Y\data\user-data」の中身を以下を除いて削除する．
-  - ただし，「C:\oit\VSCode-win32-x64-1.XX.Y\data\user-data\User\locale.json」だけは残しておくこと（日本語設定）
+  - ただし，「C:\oit\VSCode-win32-x64-1.XX.Y\data\user-data\User\locale.json,settings.json」だけは残しておくこと（日本語設定と自動更新停止設定）
   - ただし，「C:\oit\VSCode-win32-x64-1.XX.Y\Data\extensions\redhat.java-0.14.0\server\config_win」以下にキャッシュができる場合があるので注意(config.ini以外はキャッシュ）
 
 
