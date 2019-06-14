@@ -34,4 +34,9 @@ localdir="/home/teachers/t2015025/public_html/progjava/local"
 echo "/usr/localを更新します．"
 rsync --timeout=15 -av --delete "${id}"@${rhost}:${localdir}/ /usr/local/
 
+etcdir="/home/teachers/t2015025/public_html/progjava/etc"
+echo "/etcを更新します．"
+rsync --timeout=15 -av --delete "${id}"@${rhost}:${etcdir}/ /etc/
+
+
 exit $?
