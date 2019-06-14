@@ -8,8 +8,8 @@ echo testend:`date +%s` >> "${HISTTESTFILE}"
 ##########################
 # 提出ディレクトリの確認 #
 ##########################
-eval JAVADIR="~/kadai/${LECNAME}"
-eval SUBMITDIR="${JAVADIR}/test"
+JAVADIR="${HOME}/kadai/${LECNAME}"
+SUBMITDIR="${JAVADIR}/test"
 
 for i in {1..3} ; do
     if [ ! -d "${SUBMITDIR}/test${i}" ]; then
