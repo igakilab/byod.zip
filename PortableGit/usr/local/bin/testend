@@ -21,23 +21,24 @@ for i in {1..3} ; do
     fi
 done
 
-##############
-# 答案の圧縮 #
-##############
-cd "${JAVADIR}"
-tar cvfj "${JAVADIR}/.log/.${LECNAME}_`/usr/local/bin/oitname`_`date +%Y%m%d%H%M%S`.tbz2" --exclude *.class -C "${JAVADIR}" test/ | grep -v ".git" 1>> "${HISTTESTFILE}" 2>&1
-
 ###################
 # loop の強制終了 #
 ###################
 # このシェルスクリプトを起動しているプロセスのPID
 MYPID=`echo $$`
 #現在起動しているbashプロセスすべてを強制終了する．なお，このスクリプト自身(MYPID)は除外する．
-ps ux | grep bash | awk '{print $1}' | grep -v ${MYPID} | xargs -t kill 1>> "${HISTTESTFILE}" 2>&1
+ps ux | grep bash | awk '{print $1}' | grep -v ${MYPID} | xargs kill 1>> "${HISTTESTFILE}" 2>&1
 
 # testend実行時の最終コミット
 git -C ~/kadai/`/usr/local/bin/course`/test/ add -A 1>/dev/null 2>&1
 git -C ~/kadai/`/usr/local/bin/course`/test/ commit -m "`date +%s`" 1>/dev/null 2>&1
+
+##############
+# 答案の圧縮 #
+##############
+cd "${JAVADIR}"
+tar cvfj "${JAVADIR}/.log/.${LECNAME}_`/usr/local/bin/oitname`_`date +%Y%m%d%H%M%S`.tbz2" --exclude *.class -C "${JAVADIR}" test/ | grep -v ".git" 1>> "${HISTTESTFILE}" 2>&1
+
 
 echo -e "実技試験を終了します．\nPCをインターネットに接続してからshussekiコマンドを実行し，実技試験ファイルを提出してください．\n今後，testフォルダ内のファイルを編集した場合はカンニングとなる場合があります．"
 
