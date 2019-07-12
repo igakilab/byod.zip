@@ -14,6 +14,11 @@ usage(){
 	EOF
 }
 
+GB='\e[1;32m'
+GE='\e[m'
+RB='\e[1;31m'
+RE='\e[m'
+
 if [ "$#" -ne 0 ]; then
     usage
     exit 0
@@ -28,7 +33,27 @@ rsync --timeout=15 --force -avu \
         --exclude='*.class' \
         --exclude='*~'      \
         --exclude='.vscode' \
+        --exclude='.git' \
         --exclude='#*'      \
-        ${id}@${rhost}:kadai/`/usr/local/bin/course` ~/kadai/
+        ${id}@${rhost}:kadai/${COURSEYEAR} ~/kadai/ > ~/kadai/.down
 
-exit $?
+if [ $? -gt 0 ]; then
+  echo -e "${RB}rsyncは失敗しました．${RE} `date`"
+  rm ~/kadai/.down
+  exit 2
+fi
+
+rsync_msg=`cat ~/kadai/.down | grep -v -e '/\.' -e 'receiving incremental file list' -e 'bytes/sec' -e 'total size is'`
+rsync_msg_size=`cat ~/kadai/.down | grep -v -e '/\.' -e 'receiving incremental file list' -e 'bytes/sec' -e 'total size is' | wc -l`
+
+if [ $rsync_msg_size -gt 1 ]; then
+  echo "Downloadファイル一覧"
+  echo -e ${rsync_msg}
+  echo -e "${GB}rsyncは成功しました${GE} `date`"
+  rm ~/kadai/.down
+  exit 0
+else
+  echo -e "${GB}更新ファイルがありませんでした${GE} `date`"
+  rm ~/kadai/.down
+  exit 1
+fi

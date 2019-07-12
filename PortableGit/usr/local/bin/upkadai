@@ -48,12 +48,18 @@ if [ "$#" -ge 1 ]; then
 fi
 
 id="`/usr/local/bin/oitname`" || exit 1
+
+case "$id" in
+    t*) dmode="750";fmode="640";;
+    *) dmode="705";fmode="604";;
+esac
+
 rhost="`/usr/local/bin/kadaihost`"
 
-[ -d ~/kadai/`/usr/local/bin/course` ] || mkdir -p -m 705 ~/kadai/`/usr/local/bin/course`
+[ -d ~/kadai/${COURSEYEAR} ] || mkdir -p -m ${dmode} ~/kadai/${COURSEYEAR}
 
 rsync --timeout=15 --force -avu ${DFLAG} \
-        --chmod=D705,F604   \
+        --chmod=D${dmode},F${fmode}   \
         --exclude='*.exe'   \
         --exclude='*.o'     \
         --exclude='*.class' \
@@ -61,7 +67,7 @@ rsync --timeout=15 --force -avu ${DFLAG} \
         --exclude='.vscode' \
         --exclude='.git' \
         --exclude='#*'      \
-        ~/kadai/`/usr/local/bin/course` ${id}@${rhost}:kadai/ > ~/kadai/.up
+        ~/kadai/${COURSEYEAR} ${id}@${rhost}:kadai/ > ~/kadai/.up
 if [ $? -gt 0 ]; then
   echo -e "${RB}rsyncは失敗しました．${RE} `date`"
   rm ~/kadai/.up

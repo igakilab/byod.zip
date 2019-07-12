@@ -1,18 +1,18 @@
-#!/bin/sh
+#!/bin/bash -u
 #
-# Written by Yasuharu Mizutani
+# 提出サーバに公開鍵認証で接続するための設定を行う．
 #
-#
-# 各科目を識別する名前をSYSTEM_IDに設定しておくこと．
-# ssh-keygenで公開鍵のコメントに用いるため．
-#
+# Author: Yasuharu Mizutani
 
-SYSTEM_ID=`/usr/local/bin/course`
+SSHKEY_COMMENT="java-byod_publickey"
 
 GB='\e[1;32m'
 GE='\e[m'
 RB='\e[1;31m'
 RE='\e[m'
+
+echo -e "${GB}課題提出などの際に演習室のLinux環境に接続するための設定を行います．${GE}"
+sleep 0.3
 
 #
 # ユーザ名の入力
@@ -20,11 +20,16 @@ RE='\e[m'
 echo -en "${GB}e1で始まるユーザ名を入力してください${GE}: "
 read id
 case "${id}" in
-  e1??????|m1??????|t???????)
+  e1??????|m1??????)
+    dmode="705"
+    ;;
+  t???????)
+    dmode="750"
     ;;
   *)
     echo "ユーザ名が e1xxxxxx の形式ではありません"
     exit 1
+    ;;
 esac
 
 #
@@ -41,16 +46,15 @@ echo "ConnectTimeout 8"         >> ~/.ssh/config
 #
 eval PUBKEY="~/.ssh/id_rsa.pub"
 eval PRIKEY="~/.ssh/id_rsa"
+echo -e "\n${GB}公開鍵認証のための鍵を生成します．${GE}"
 if [ -f "${PUBKEY}" -a -f "${PRIKEY}" ]; then
-    :
+    echo "既に鍵がありますので飛ばします．"
 else
-    echo -e "${GB}今からエンターキーを3回押してください${GE}"
-    sleep 0.2
-    ssh-keygen -t rsa -C "@${SYSTEM_ID}"
+    ssh-keygen -t rsa -C "@${SSHKEY_COMMENT}" -P "" -f "${PRIKEY}"
 fi
 
 #
-# 鍵認証の設定とユーザ名の登録
+# 公開鍵認証の設定とユーザ名の登録
 # (kadaiディレクトリも作っておく)
 #
 RHOST="`/usr/local/bin/kadaihost`"
@@ -58,18 +62,20 @@ RCOMM="
     mkdir -p -m 700 .ssh;
     touch .ssh/authorized_keys;
     cat >> .ssh/authorized_keys;
-    chmod 600 .ssh/authorized_keys
-    mkdir -p -m 705 kadai;
+    chmod 600 .ssh/authorized_keys;
+    mkdir -p -m ${dmode} kadai;
+    touch .initssh_done_${COURSEYEAR};
 "
-#    grep -v '`hostname`' .ssh/authorized_keys > .ssh/tmp;
-#    mv .ssh/tmp .ssh/authorized_keys;
-echo ""
-echo -e "${GB}演習室のパスワードを入力してください${GE}"
+
+echo -e "\n${GB}公開鍵を演習室のLinux環境に登録します．このとき，Linux環境に接続"
+echo -e   "${GB}するために演習室のパスワードが尋ねられますので入力してください．"
+echo -e   "${GB}（既に公開鍵を登録済の場合は尋ねられずに完了となります）${GE}"
 if cat "${PUBKEY}" | ssh "${id}@${RHOST}" "${RCOMM}"; then
     echo "${id}" > ~/.oitname
-    echo -e "${GB}成功しました${GE}"
+    echo -e "\n${GB}完了しました${GE}"
 else
-    echo -e "${RB}失敗しました${RE}"
+    echo -e "\n${RB}失敗しました${RE}"
     exit 1
 fi
 exit 0
+
