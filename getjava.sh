@@ -18,7 +18,7 @@ do
 done
 for j in `seq 1 3`
 do
-  mkdir -p ~/public_html/progjava/${class}/test/test${j}
+  mkdir -p ~/public_html/progjava/${class}/test0${j}
 done
 
 chmod 755 -R ~/public_html/progjava/${class}/
