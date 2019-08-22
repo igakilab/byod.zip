@@ -32,6 +32,11 @@ case "${id}" in
     ;;
 esac
 
+# /homeの作成
+export MSYS=winsymlinks:lnk
+mkdir -p /home
+ln -s "${HOME}" "/home/${USERNAME}"
+
 #
 # .sshディレクトリの作成
 #
