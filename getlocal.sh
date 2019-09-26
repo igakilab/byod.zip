@@ -7,6 +7,7 @@ git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip.git
 echo /PortableGit/usr/local/bin/ > ${tempdir}/.git/info/sparse-checkout
 echo /PortableGit/etc/ >> ${tempdir}/.git/info/sparse-checkout
 git -C ${tempdir} pull origin master
+mkdir -p ~/public_html/progjava/local/
 mv ${tempdir}/PortableGit/usr/local/bin/ ~/public_html/progjava/local/
 mv ${tempdir}/PortableGit/etc/profile.d/ ~/public_html/progjava/etc/
 rm -rf ${tempdir}
