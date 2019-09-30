@@ -9,7 +9,7 @@ usage(){
 	使い方:
 	    getjava
 	
-	~/kadai/`/usr/local/bin/course`/を更新する．
+	~/kadai/$COURSEYEAR/を更新する．
 	
 	EOF
 }
@@ -29,9 +29,12 @@ fi
 
 id="`/usr/local/bin/oitname`" || exit 1
 rhost="`/usr/local/bin/kadaihost`"
-javadir="/home/teachers/t2015025/public_html/progjava/`/usr/local/bin/course`/"
+javadir="/home/teachers/t2015025/public_html/progjava/$COURSEYEAR/"
 
-echo "~/kadai/`/usr/local/bin/course`/を更新します．"
-rsync --timeout=15 -av -zz "${id}"@${rhost}:${javadir} ~/kadai/`/usr/local/bin/course`/
+# Hidden setting
+/c/Windows/System32/attrib.exe +H ~/kadai/${COURSEYEAR}/.log 1>> "$HISTFILE" 2>&1
+
+echo "~/kadai/${COURSEYEAR}/を更新します．"
+rsync --timeout=15 -av -zz "${id}"@${rhost}:${javadir} ~/kadai/${COURSEYEAR}/
 
 exit $?

@@ -12,14 +12,14 @@ fi
 
 PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/core_perl:/usr/bin/vendor_perl
 export LANG="ja_JP.UTF-8"
+export COURSEYEAR=`/usr/local/bin/course`
 
-mkdir -p "$USERPROFILE/oithomes/java/kadai/`/usr/local/bin/course`/.log/"
+mkdir -p "$USERPROFILE/oithomes/java/kadai/$COURSEYEAR/.log/"
 export PATH=/c/oit/`/usr/local/bin/coursejdk`/bin/:$PATH
 export PATH=/c/oit/`/usr/local/bin/coursevscode`/:$PATH
 export HOME=$(cd "$USERPROFILE\oithomes\java" && pwd)
 
 export HISTDATE=`date +'%Y%m'`
-export COURSEYEAR=`/usr/local/bin/course`
-HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE"
+export HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE"
 HISTTIMEFORMAT="%Y/%m/%dT%T%z "
 export PROMPT_COMMAND='echo -e "res:$?\tpwd:$PWD" >> ~/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE;history -a'
