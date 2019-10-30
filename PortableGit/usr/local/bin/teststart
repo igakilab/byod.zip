@@ -22,11 +22,13 @@ done
 
 #リポジトリ初期化，コミッターの名前とアドレス登録，gitignore設定
 echo [git_init]:`date +%s` >> "${HISTTESTFILE}"
+git config --global core.autoCRLF false
 for i in `seq 1 3`
 do
   git -C ~/kadai/${COURSEYEAR}/test0${i}/ init 1>> "${HISTTESTFILE}" 2>&1
   git -C ~/kadai/${COURSEYEAR}/test0${i}/ config --local user.name "`/usr/local/bin/oitname`" 1>> "${HISTTESTFILE}" 
   git -C ~/kadai/${COURSEYEAR}/test0${i}/ config --local user.email "`/usr/local/bin/oitname`@st.oit.ac.jp" 1>> "${HISTTESTFILE}" 2>&1
+  git -C ~/kadai/${COURSEYEAR}/test0${i}/ config --local core.autoCRLF false 1>> "${HISTTESTFILE}" 2>&1
   echo -e "*.class\n.*\n*~\n#*\n*.tbz2" > "$HOME/kadai/${COURSEYEAR}/test0${i}/.gitignore" 2>> "${HISTTESTFILE}"
 done
 
