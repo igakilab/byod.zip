@@ -14,9 +14,9 @@
   <classpathentry kind="src" path="lec12"/>
   <classpathentry kind="src" path="lec13"/>
   <classpathentry kind="src" path="lec14"/>
-  <classpathentry kind="src" path="test01"/>
-  <classpathentry kind="src" path="test02"/>
-  <classpathentry kind="src" path="test03"/>
+  <classpathentry excluding="*.md|.git*|.git/" kind="src" path="test01"/>
+  <classpathentry excluding="*.md|.git*|.git/" kind="src" path="test02"/>
+  <classpathentry excluding="*.md|.git*|.git/" kind="src" path="test03"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

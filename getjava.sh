@@ -16,9 +16,12 @@ for i in `seq -f %02g 1 14`
 do
   mkdir -p ~/public_html/progjava/${class}/lec${i}
 done
-for j in `seq 1 3`
-do
-  mkdir -p ~/public_html/progjava/${class}/test0${j}
-done
+# for j in `seq 1 3`
+# do
+#  mkdir -p ~/public_html/progjava/${class}/test0${j}
+# done
+mkdir -p ~/public_html/progjava/${class}/test01
+# mkdir -p ~/public_html/progjava/${class}/test02
+mkdir -p ~/public_html/progjava/${class}/test03
 
 chmod 755 -R ~/public_html/progjava/${class}/
