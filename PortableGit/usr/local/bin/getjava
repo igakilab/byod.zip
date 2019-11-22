@@ -44,7 +44,7 @@ javadir="/home/teachers/t2015025/public_html/progjava/$COURSEYEAR/"
 /c/Windows/System32/attrib.exe +H ~/kadai/${COURSEYEAR}/.log 1>> "$HISTFILE" 2>&1
 
 if [ $(echo $(expr $(date +%s) - $(sshrun date +%s) ) | tr -d '-') -gt 30 ]; then
-  echo -e "${RB}時計がずれすぎているためgetlocalが失敗しました．${RE}Windowsの時計を正しく設定してから再実行してください"
+  echo -e "${RB}時計がずれすぎているためgetjavaが失敗しました．${RE}Windowsの時計を正しく設定してから再実行してください"
   exit 2
 fi
 
