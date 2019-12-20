@@ -11,24 +11,24 @@
 - [java_archive](https://drive.google.com/drive/folders/1IqUOxfcV4Ort2wKhY1OpOVpVRusfTG-r?usp=sharing) にあるoit-javaYYYYMMDD.exeの最新版をC:\oitにダウンロードし，実行（展開）する
   - 自己解凍ファイル展開後のフォルダ構成は以下のとおり(X,Y,Zにはバージョン番号が入る)
 ```
-C:\oit\vscode-portable-win64-1.XX.Y-Z\app
-C:\oit\vscode-portable-win64-1.XX.Y-Z\data
-C:\oit\vscode-portable-win64-1.XX.Y-Z\vscode-portable.exe
+C:\oit\java\vscode-portable-win64-1.XX.Y-Z\app
+C:\oit\java\vscode-portable-win64-1.XX.Y-Z\data
+C:\oit\java\vscode-portable-win64-1.XX.Y-Z\vscode-portable.exe
 :
-C:\oit\openjdk1.8.0.XXX\bin
-C:\oit\openjdk1.8.0.XXX\include
-C:\oit\openjdk1.8.0.XXX\jre
-C:\oit\openjdk1.8.0.XXX\lib
+C:\oit\java\amazonjdk1.8.0.XXX\bin
+C:\oit\java\amazonjdk1.8.0.XXX\include
+C:\oit\java\amazonjdk1.8.0.XXX\jre
+C:\oit\java\amazonjdk1.8.0.XXX\lib
 :
-C:\oit\PortableGit-2.XX.Y-64\bin
-C:\oit\PortableGit-2.XX.Y-64\cmd
-C:\oit\PortableGit-2.XX.Y-64\git-bash.exe
+C:\oit\java\PortableGit-2.XX.Y-64\bin
+C:\oit\java\PortableGit-2.XX.Y-64\cmd
+C:\oit\java\PortableGit-2.XX.Y-64\git-bash.exe
 :
-C:\oit\java-bash-2.XX.Y-64.exe
+C:\oit\java\java-bash-2.XX.Y-64.exe
 ```
 
 ### 開発環境セットアップ
-- `C:\oit\java-bash-2.XX.Y-64.exe`を実行する．
+- `C:\oit\java\java-bash-2.XX.Y-64.exe`を実行する．
   - `C:\Users\{ユーザ名}\oithomes\java\kadai\javaYY\`フォルダが生成される（なお，javaYYのYYにはその年の末尾2桁が入る）．
 - 「initssh」コマンドを実行する
   - $HOMEフォルダとして`C:\Users\{ユーザ名}\oithomes\java`がセットされる．
@@ -105,13 +105,27 @@ C:\oit\java-bash-2.XX.Y-64.exe
   - `C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json` ファイルが生成されるので，下記のようになっているか確認しておくこと
     - 本リポジトリのvscodeフォルダ内のsettings.jsonを↑にコピーしても良い．
 
-```
+```json
 {
-    "update.enableWindowsBackgroundUpdates": false,
-    "update.mode": "none",
-    "update.showReleaseNotes": false,
-    "extensions.autoCheckUpdates": false,
-    "extensions.autoUpdate": false
+  "terminal.integrated.shell.windows": "C:\\oit\\java\\PortableGit-2.24.1.2-64\\bin\\bash.exe",
+  "terminal.integrated.env.windows": {
+    "MSYSTEM": "MINGW64",
+    "CHERE_INVOKING": "1"
+  },
+  "terminal.integrated.shellArgs.windows": [
+    "--login",
+    "-i"
+  ],
+  "update.enableWindowsBackgroundUpdates": false,
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "extensions.ignoreRecommendations": true,
+  "extensions.showRecommendationsOnlyOnDemand": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.configuration.checkProjectSettingsExclusions": false
 }
 ```
 
