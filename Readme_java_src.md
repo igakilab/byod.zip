@@ -4,9 +4,9 @@
 - getjava.shとgetlocal.shを/home/teachers/t2015025/public_html/progjava/に配置し，各コマンドを実行する
   - getjava.shのclass設定が正しいかを確認しておく（毎年更新の必要あり）
 - 上記 progjava フォルダに対して権限設定が適切であることを確認しておくこと
-  - `progjava`内の`javaXX`,`local`以下のディレクトリを755
+  - `progjava`内の`local`以下のディレクトリを755，各ファイルを644にする
+  - `progjava`内の`javaXX`以下のディレクトリを775(他教員からの書き換えに対応するため），各ファイルを664にする
     - javaXXにはjava19等の年度情報が入る
-  - `progjava`内の各ファイルは644
 
 
 ## 運用上のルール
