@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$#"  = "1" ] && [ "$1" = "-v" ]; then
-    echo "openjdk1.8.0.212"
+    echo "amazonjdk11.0.5_10"
 else
-    echo "openjdk1.8.0.212"
+    echo "amazonjdk11.0.5_10"
 fi
