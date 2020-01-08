@@ -1,8 +1,8 @@
 #!/bin/sh
 if [ "$#"  = "1" ] && [ "$1" = "-v" ]; then
-    echo localenv-201912271153
+    echo localenv-201912312239
     echo javaenv-201912251617
 else
-    echo localenv-20191227
+    echo localenv-20191231
     echo javaenv-20191225
 fi

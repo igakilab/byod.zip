@@ -19,11 +19,16 @@ echo -e "演習実施中や課題ファイル編集時には${GB}ずっと起動
 
 trap end_proc 2 15
 function end_proc(){
-  rm ~/kadai/.??*
+  rm ~/kadai/.??* 2>/dev/null
   echo "[Shusseki End]#`date +'%s'`" >> "${HISTFILE}"
   echo '終了時の更新ファイルを提出し，出席スクリプトを終了します'
   /usr/local/bin/upkadai
-  exit 0
+  if [ $? -gt 0 ]; then
+    exit 0
+  else
+    /usr/local/bin/uplog
+    exit 1
+  fi
 }
 
 [ ! -d "$HOME/kadai/$COURSEYEAR/.log" ] && mkdir -p "$HOME/kadai/$COURSEYEAR/.log"

@@ -65,12 +65,15 @@ rsync --timeout=15 --force -avu ${DFLAG} \
         --exclude='*.class' \
         --exclude='*~'      \
         --exclude='.vscode' \
+        --exclude='.log' \
         --exclude='.git' \
         --exclude='#*'      \
         ~/kadai/${COURSEYEAR} ${id}@${rhost}:kadai/ > ~/kadai/.up
 if [ $? -gt 0 ]; then
   echo -e "${RB}rsyncは失敗しました．${RE} `date`"
-  rm ~/kadai/.up
+  if [[ -f ~/kadai/.up ]]; then
+    rm ~/kadai/.up
+  fi
   exit 2
 fi
 
