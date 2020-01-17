@@ -65,22 +65,14 @@ rsync --timeout=15 --force -avu ${DFLAG} \
         --exclude='*.class' \
         --exclude='*~'      \
         --exclude='.vscode' \
+        --exclude='.history' \
         --exclude='.git' \
         --exclude='#*'      \
-        ~/kadai/${COURSEYEAR}/.log ${id}@${rhost}:kadai/${COURSEYEAR}/ > ~/kadai/.uplog
+        ~/kadai/${COURSEYEAR}/.log ${id}@${rhost}:kadai/${COURSEYEAR}/ > /dev/null
 if [ $? -gt 0 ]; then
-  echo -e "rsync(log)は失敗しました．`date`" >> ${HISTFILE}
-  if [[ -f ~/kadai/.uplog ]]; then
-    rm ~/kadai/.uplog
-  fi
+  echo -e "[uplog]rsync(log)は失敗しました．`date`" >> ${HISTFILE}
   exit 2
 fi
 
-rsync_msg=`cat ~/kadai/.uplog | grep -v -e '/\.' -e 'sending incremental file list' -e 'bytes/sec' -e 'total size is'`
-rsync_msg_size=`cat ~/kadai/.uplog | grep -v -e '/\.' -e 'sending incremental file list' -e 'bytes/sec' -e 'total size is' | wc -l`
-
-if [ $rsync_msg_size -gt 1 ]; then
-  echo -e "${GB}rsyncは成功しました${GE} `date`" >> ${HISTFILE}
-  rm ~/kadai/.uplog
-  exit 0
-fi
+echo -e "[uplog]rsync(log)は成功しました `date`" >> ${HISTFILE}
+exit 0

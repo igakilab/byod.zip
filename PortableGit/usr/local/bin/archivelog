@@ -2,12 +2,8 @@
 #
 # Written by Hiroshi Igaki.
 
-HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE"
-
-# .log/.history 以下をarchiveして.hist202001091100.7z みたいな感じでファイルを作成する．この際test及びmove(圧縮したら元ファイル削除）するようにする
-# archiveを実行するかは既存のファイルの中に30分以内に作成された7zファイルがない場合のみ（更新時刻でチェックすれば良いかも）
-# 2ヶ月以上前のものは削除する．
-LOGDIR="$HOME/kadai/$COURSEYEAR/.log/"
+HISTFILE=~/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE
+LOGDIR=~/kadai/$COURSEYEAR/.log/
 VSHISTDIR="${LOGDIR}.history/"
 VSHIST7Z="${LOGDIR}.hist`date "+%Y%m%d%H%M%S"`.7z"
 
@@ -39,7 +35,7 @@ fi
 
 
 # if VSHIST7Z does not exist in 30 minutes, archive it
-if [ "$(find ${LOGDIR} -name \*.7z -mmin -10 | wc -l)" -eq 0 ] || [ "$FFLAG" = "--force" ]; then
+if [ "$(find ${LOGDIR} -name \*.7z -mmin -30 | wc -l)" -eq 0 ] || [ "$FFLAG" = "--force" ]; then
   if [ -d "$VSHISTDIR" ]; then
     7za a "$VSHIST7Z" -y -bsp0 -bso0 "$VSHISTDIR" -sdel 2>/dev/null
     if [ $? -gt 0 ]; then
@@ -47,4 +43,5 @@ if [ "$(find ${LOGDIR} -name \*.7z -mmin -10 | wc -l)" -eq 0 ] || [ "$FFLAG" = "
     fi
   fi
 fi
-
+# delete 7z files older than 32 days
+find ${LOGDIR} -name \*.7z -daystart -mtime +62 | xargs rm -rf
