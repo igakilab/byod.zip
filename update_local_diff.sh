@@ -40,8 +40,8 @@ function ConfirmExecution() {
 
 }
 function RsyncEnvironment() {
-  echo "$1から$2への同期を行います"
-  rsync -avu \
+  echo "$1から$2への同期を行います $3"
+  rsync -av $3 \
         --exclude='bash.bash_logout'  \
         --exclude='bash.bashrc'  \
         --exclude='DIR_COLORS'  \
@@ -97,5 +97,8 @@ function UpdateVersionNumber() {
   sed -i -E "s/$1env-[0-9]{8}/$1env-`date "+%Y%m%d"`/g" ${INSTALLED_BIN}getversion
 }
 
+RsyncEnvironment ${INSTALLED_ETC} ${REPO_ETC} --dry-run
+RsyncEnvironment ${INSTALLED_BIN} ${REPO_BIN} --dry-run
 CheckDiff
+
 ConfirmExecution
