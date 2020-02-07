@@ -72,7 +72,7 @@ function ConfirmVersionUpdate() {
 }
 function RsyncEnvironment() {
   echo "$1から$2への同期を行います $3"
-  rsync -av $3 \
+  rsync -av --checksum $3 \
         --exclude='bash.bash_logout'  \
         --exclude='bash.bashrc'  \
         --exclude='DIR_COLORS'  \
