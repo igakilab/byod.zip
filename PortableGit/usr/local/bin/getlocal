@@ -46,11 +46,12 @@ if [ $(echo $(expr $(date +%s) - $(sshrun date +%s) ) | tr -d '-') -gt 30 ]; the
 fi
 
 echo "/usr/localを更新します．"
-rsync --timeout=15 -av --delete "${id}"@${rhost}:${localdir}/ /usr/local/
+rsync --timeout=15 -a --delete "${id}"@${rhost}:${localdir}/ /usr/local/
 
 profiledir="/home/teachers/t2015025/public_html/progjava/etc/profile.d"
 echo "profile.dを更新します．"
-rsync --timeout=15 -av --delete "${id}"@${rhost}:${profiledir}/ /etc/profile.d/
+rsync --timeout=15 -a --delete "${id}"@${rhost}:${profiledir}/ /etc/profile.d/
 
+getversion >> ~/kadai/$COURSEYEAR/.log/.version.history
 
 exit $?

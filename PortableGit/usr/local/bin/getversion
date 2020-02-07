@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$#"  = "1" ] && [ "$1" = "-v" ]; then
-    echo localenv-202001231342
+    echo [localenv]202002072200
 else
-    echo localenv-20200123
+    echo [localenv]20200207
 fi

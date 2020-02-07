@@ -1,6 +1,8 @@
 #/bin/bash
 
-INSTALLED=/C/oit/java/PortableGit-2.24.1.2-64
+class=java20
+
+INSTALLED=/C/oit/${class}/PortableGit-2.24.1.2-64
 INSTALLED_ETC=${INSTALLED}/etc/
 INSTALLED_BIN=${INSTALLED}/usr/local/bin/
 
@@ -23,7 +25,7 @@ function ConfirmExecution() {
   elif [ $input = 'yes' ] || [ $input = 'YES' ] || [ $input = 'y' ] ; then
 
     echo "  同期を実行します."
-    UpdateVersionNumber local
+    ConfirmVersionUpdate
     RsyncEnvironment ${INSTALLED_ETC} ${REPO_ETC}
     RsyncEnvironment ${INSTALLED_BIN} ${REPO_BIN}
 
@@ -35,6 +37,35 @@ function ConfirmExecution() {
 
     echo "  yes または no を入力して下さい."
     ConfirmExecution
+
+  fi
+
+}
+function ConfirmVersionUpdate() {
+
+  echo "----------------------------"
+  echo "getversionのバージョン番号を更新しますか?"
+  echo " 更新する場合は yes、しない場合は no と入力して下さい."
+  read input
+
+  if [ -z $input ] ; then
+
+    echo "  yes または no を入力して下さい."
+    ConfirmVersionUpdate
+
+  elif [ $input = 'yes' ] || [ $input = 'YES' ] || [ $input = 'y' ] ; then
+
+    echo "  getversionのバージョン番号を更新します."
+    UpdateVersionNumber local
+
+  elif [ $input = 'no' ] || [ $input = 'NO' ] || [ $input = 'n' ] ; then
+
+    echo "  バージョン番号を更新しません."
+
+  else
+
+    echo "  yes または no を入力して下さい."
+    ConfirmVersionUpdate
 
   fi
 
@@ -90,11 +121,11 @@ diff -r ${INSTALLED_ETC} ${REPO_ETC} | grep ${ETC_IGNORED}
 diff ${INSTALLED_BIN} ${REPO_BIN}
 }
 
-# arg $1 is local or java
+# arg $1 is local
 function UpdateVersionNumber() {
   echo "getversionを更新します"
-  sed -i -E "s/$1env-[0-9]{12}/$1env-`date "+%Y%m%d%H%M"`/g" ${INSTALLED_BIN}getversion
-  sed -i -E "s/$1env-[0-9]{8}/$1env-`date "+%Y%m%d"`/g" ${INSTALLED_BIN}getversion
+  sed -i -E "s/\[localenv\][0-9]{12}/\[localenv\]`date "+%Y%m%d%H%M"`/g" ${INSTALLED_BIN}getversion
+  sed -i -E "s/\[localenv\][0-9]{8}/\[localenv\]`date "+%Y%m%d"`/g" ${INSTALLED_BIN}getversion
 }
 
 RsyncEnvironment ${INSTALLED_ETC} ${REPO_ETC} --dry-run

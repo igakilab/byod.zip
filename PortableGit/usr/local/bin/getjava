@@ -49,6 +49,8 @@ if [ $(echo $(expr $(date +%s) - $(sshrun date +%s) ) | tr -d '-') -gt 30 ]; the
 fi
 
 echo "~/kadai/${COURSEYEAR}/を更新します．"
-rsync --timeout=15 -av -zz "${id}"@${rhost}:${javadir} ~/kadai/${COURSEYEAR}/
+rsync --timeout=15 -a -zz "${id}"@${rhost}:${javadir} ~/kadai/${COURSEYEAR}/
+
+cat ~/kadai/$COURSEYEAR/.log/.version >> ~/kadai/$COURSEYEAR/.log/.version.history
 
 exit $?
