@@ -15,8 +15,8 @@ export LANG="ja_JP.UTF-8"
 export COURSEYEAR=`/usr/local/bin/course`
 
 mkdir -p "$USERPROFILE/oithomes/java/kadai/$COURSEYEAR/.log/"
-export PATH=/c/oit/`/usr/local/bin/coursejdk`/bin/:$PATH
-export PATH=/c/oit/`/usr/local/bin/coursevscode`/:$PATH
+export PATH=/c/oit/java/`/usr/local/bin/coursejdk`/bin/:$PATH
+export PATH=/c/oit/java/`/usr/local/bin/coursevscode`/:$PATH
 export HOME=$(cd "$USERPROFILE\oithomes\java" && pwd)
 
 export HISTDATE=`date +'%Y%m'`
