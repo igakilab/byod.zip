@@ -51,4 +51,6 @@ fi
 echo "~/kadai/${COURSEYEAR}/を更新します．"
 rsync --timeout=15 -av -zz "${id}"@${rhost}:${javadir} ~/kadai/${COURSEYEAR}/
 
+cat ~/kadai/$COURSEYEAR/.log/.version >> ~/kadai/$COURSEYEAR/.log/.version.history
+
 exit $?

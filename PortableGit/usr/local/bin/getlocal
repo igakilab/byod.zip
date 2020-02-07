@@ -52,5 +52,6 @@ profiledir="/home/teachers/t2015025/public_html/progjava/etc/profile.d"
 echo "profile.dを更新します．"
 rsync --timeout=15 -av --delete "${id}"@${rhost}:${profiledir}/ /etc/profile.d/
 
+getversion >> ~/kadai/$COURSEYEAR/.log/.version.history
 
 exit $?
