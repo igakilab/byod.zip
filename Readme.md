@@ -11,24 +11,24 @@
 - [java_archive](https://drive.google.com/drive/folders/1IqUOxfcV4Ort2wKhY1OpOVpVRusfTG-r?usp=sharing) にあるoit-javaYYYYMMDD.exeの最新版をC:\oitにダウンロードし，実行（展開）する
   - 自己解凍ファイル展開後のフォルダ構成は以下のとおり(X,Y,Zにはバージョン番号が入る)
 ```
-C:\oit\java\vscode-portable-win64-1.XX.Y-Z\app
-C:\oit\java\vscode-portable-win64-1.XX.Y-Z\data
-C:\oit\java\vscode-portable-win64-1.XX.Y-Z\vscode-portable.exe
+C:\oit\javaYY\vscode-portable-win64-1.XX.Y-Z\app
+C:\oit\javaYY\vscode-portable-win64-1.XX.Y-Z\data
+C:\oit\javaYY\vscode-portable-win64-1.XX.Y-Z\vscode-portable.exe
 :
-C:\oit\java\amazonjdk1.8.0.XXX\bin
-C:\oit\java\amazonjdk1.8.0.XXX\include
-C:\oit\java\amazonjdk1.8.0.XXX\jre
-C:\oit\java\amazonjdk1.8.0.XXX\lib
+C:\oit\javaYY\amazonjdk11.XXX\bin
+C:\oit\javaYY\amazonjdk11.XXX\include
+C:\oit\javaYY\amazonjdk11.XXX\jre
+C:\oit\javaYY\amazonjdk11.XXX\lib
 :
-C:\oit\java\PortableGit-2.XX.Y-64\bin
-C:\oit\java\PortableGit-2.XX.Y-64\cmd
-C:\oit\java\PortableGit-2.XX.Y-64\git-bash.exe
+C:\oit\javaYY\PortableGit-2.XX.Y-64\bin
+C:\oit\javaYY\PortableGit-2.XX.Y-64\cmd
+C:\oit\javaYY\PortableGit-2.XX.Y-64\git-bash.exe
 :
 C:\oit\java\java-bash-2.XX.Y-64.exe
 ```
 
 ### 開発環境セットアップ
-- `C:\oit\java\java-bash-2.XX.Y-64.exe`を実行する．
+- `C:\oit\javaYY\java-bash-2.XX.Y-64.exe`を実行する．
   - `C:\Users\{ユーザ名}\oithomes\java\kadai\javaYY\`フォルダが生成される（なお，javaYYのYYにはその年の末尾2桁が入る）．
 - 「initssh」コマンドを実行する
   - $HOMEフォルダとして`C:\Users\{ユーザ名}\oithomes\java`がセットされる．
@@ -77,78 +77,53 @@ C:\oit\java\java-bash-2.XX.Y-64.exe
 
 ## Step2. 以下の2つをC:\oit以下に追加インストール
 - ディレクトリ名を指定のものに変更する
-- redhat openjdk (x64)
-  - https://developers.redhat.com/products/openjdk/download/
-  - C:\oitにopenjdk1.8.0.191のようなバージョンに対応するフォルダを作成し，DLしたopenjdkのzipファイル内の中身を展開する．
-    - C:\oit\openjdk1.8.0.191\bin といったディレクトリ構成になっていることを確認する．
+- Amazon coretto (x64)
+  - https://aws.amazon.com/jp/corretto/
+  - C:\oit\javaYYにamazonjdk11.0.5_10のようなバージョンに対応するフォルダを作成し，DLしたjdkのzipファイル内の中身を展開する．
+    - C:\oit\javaYY\amazonjdk11.0.5_10\bin といったディレクトリ構成になっていることを確認する．
 - PortableGit(x64)（解凍するだけ）
   - フォルダ名は「PortableGit-2.20.0-64」のようにつける
   - [PortableGit-2.xx.x.xx-64-bit.7z.exe](https://github.com/git-for-windows/git/releases)
   - bash.exe経由で起動するように本リポジトリのjava-bashフォルダからexeファイルを作成しておく
-    - go環境を作成し(msys2のpacman利用)，java-bash/build_java-bash.sh を実行する．その後ファイル名をjava-bash-2.xx.x-64.exe にし，c:\oit直下に配置する．
+    - go環境を作成し(msys2のpacman利用)，java-bash/build_java-bash.sh を実行する．その後ファイル名をjava-bash-2.xx.x-64.exe にし，c:\oit\javaYY直下に配置する．
 
 ## Step3. vscodeの拡張機能の追加
 - Japanese Language Pack for Visual Studio Code
-  - Install後にCtrl+Shift+P を押してコマンド パレットを表示させ、"config" と入力し、利用できるコマンドのリストをフィルター処理してから Configure Display Language を選択すると，locale.jsonが生成される．
-  - 最新のバージョンだとInstall後に再起動すると自動で設定するっぽいが，念のためにlocale.jsonファイルをvscode経由で作成しておくこと．
-    - 本リポジトリのvscodeフォルダ内の`locale.json`を`C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code\User`に配置しても良い
-    - 同時にCode直下にlanguagepacks.jsonもコピーしておくこと
+  - 最新のバージョンだとInstall後に再起動すると自動で設定するっぽい
 - Language support for Java ™ for Visual Studio Code, Debugger for Java
-  - Java Extension Packだと不要なMaven pluginまでインストールされるので，個別に2つのプラグインをインストールする
+  - Java Extension Packだと不要なMaven pluginとかまでインストールされるので，個別に2つのプラグインをインストールする
 - EvilInspector
   - 全角スペースを強調表示する
-
+- Local History
+  - バックアップ用
 ## Step4. VS Codeユーザー設定の変更
 - ファイル->基本設定->設定をクリックする
 - ユーザー設定を選択し，updateで設定を検索する．
 - 拡張機能やアプリケーションの更新関連の自動アップデート等をすべてOFFにしておく
-  - `C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json` ファイルが生成されるので，下記のようになっているか確認しておくこと
-    - 本リポジトリのvscodeフォルダ内のsettings.jsonを↑にコピーしても良い．
-
-```json
-{
-  "terminal.integrated.shell.windows": "C:\\oit\\java\\PortableGit-2.24.1.2-64\\bin\\bash.exe",
-  "terminal.integrated.env.windows": {
-    "MSYSTEM": "MINGW64",
-    "CHERE_INVOKING": "1"
-  },
-  "terminal.integrated.shellArgs.windows": [
-    "--login",
-    "-i"
-  ],
-  "update.enableWindowsBackgroundUpdates": false,
-  "update.mode": "none",
-  "update.showReleaseNotes": false,
-  "extensions.autoUpdate": false,
-  "extensions.autoCheckUpdates": false,
-  "extensions.ignoreRecommendations": true,
-  "extensions.showRecommendationsOnlyOnDemand": true,
-  "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "java.configuration.checkProjectSettingsExclusions": false
-}
-```
+  - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json` ファイルが生成されるので，下記のようになっているか確認しておくこと
+    - 本リポジトリのvscodeフォルダ内のsettings.jsonを↑にコピーしても良い．その際，bash.exeのディレクトリを確認しておくこと．
+    - https://github.com/igakilab/byod.zip/blob/master/vscode/User/settings.json
 
 ## Step5. VS Codeワークスペース設定
 - 自動整形設定やjava.homeの設定(settings.jsonに追記）
   - https://qiita.com/maron8676/items/017cd830ab0c5fb8bcac
-- 本リポジトリjava_srcフォルダ参照．
+- JavaSrcリポジトリ参照
 
 ### Step6. 不要なフォルダを削除
-- `C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code`の中身を以下を除いて削除する．
-  - `C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json,locale.json`
-  - `C:\oit\vscode-portable-win64-1.31.0-1\data\appdata\Code\languagepacks.json`
-- `C:\oit\vscode-portable-win64-1.31.0-1\data\extensions\redhat.java-0.38.0\server\config_win`以下にキャッシュができる場合があるので削除する(config.ini以外はキャッシュ）
-- `C:\oit\vscode-portable-win64-1.31.0-1\data\logs`フォルダを丸ごと削除
-- `C:\oit\vscode-portable-win64-1.31.0-1\logs`フォルダを丸ごと削除
+- `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code`の中身を以下を除いて削除する．
+  - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json,locale.json`
+  - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\languagepacks.json`
+- `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\extensions\redhat.java-0.38.0\server\config_win`以下にキャッシュができる場合があるので削除する(config.ini以外はキャッシュ）
+- `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\logs`フォルダを丸ごと削除
+- `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\logs`フォルダを丸ごと削除
 
 ### Step7. 演習フォルダ(本リポジトリ)のセットアップ
 - .vscode以下のlaunch.json, settings.json
 - フォルダルートにある.classpathと.project
-- 以上のファイルの設定は本リポジトリ`java_src`参照のこと
+- 以上のファイルの設定はJavaSrcリポジトリ参照のこと
 
 ### Step8. シェルのセットアップ
-- C:\oit\PortableGit-2.XX.YY.Z-64 以下に本リポジトリのPortableGitフォルダ以下をコピーする
+- C:\oit\javaYY\PortableGit-2.XX.YY.Z-64 以下に本リポジトリのPortableGitフォルダ以下をコピーする
   - PortableGit/usr/local/bin/course,coursejdk,coursevscode が更新されているかを確認する
   
 ### Step9. /usr/local/bin/と学生用java演習フォルダをサーバに設置
@@ -162,9 +137,10 @@ C:\oit\java\java-bash-2.XX.Y-64.exe
   - `progjava`内の各ファイルは644
 
 # 今後の課題
-### ~~F5でビルドしたときの-Dfile.encoding=UTF-8オプションのせいでScannerでの入力が文字化けする~~
+### F5でビルドしたときの-Dfile.encoding=UTF-8オプションのせいでScannerでの入力が文字化けする
 - vscode経由でbashを起動する場合，標準入力はsjis(ms932,windows-31j)になるっぽい．なのでencodingを明示的にms932とかに設定する必要があった
 - launch.jsonの"encoding": "ms932",にしたらScannerでの文字化けもなくなった．
+- 2019年度はこれでいけたが，vscodeのバージョンが上がって駄目になった・・．
 
 ### ~~Javaのlanguage serverがしょっちゅうクラッシュする~~（一応いけた）
 - [MS本家のportable mode](https://code.visualstudio.com/docs/editor/portable)だとNGだが，↓からダウンロードしたvscode(v1.31-0.1 windows-64bits 7zip archives)を利用したらOKだった．
