@@ -70,9 +70,9 @@ rsync --timeout=15 --force -avu ${DFLAG} \
         --exclude='#*'      \
         ~/kadai/${COURSEYEAR}/.log ${id}@${rhost}:kadai/${COURSEYEAR}/ > /dev/null
 if [ $? -gt 0 ]; then
-  echo -e "[uplog]rsync(log)は失敗しました．`date`" >> ${HISTFILE}
+  echo -e "[uplog]rsync(log)は失敗しました．`date`" >> "${HISTFILE}"
   exit 2
 fi
 
-echo -e "[uplog]rsync(log)は成功しました `date`" >> ${HISTFILE}
+echo -e "[uplog]rsync(log)は成功しました `date`" >> "${HISTFILE}"
 exit 0

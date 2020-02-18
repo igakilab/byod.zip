@@ -111,7 +111,7 @@ C:\oit\java\java-bash-2.XX.Y-64.exe
 
 ### Step6. 不要なフォルダを削除
 - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code`の中身を以下を除いて削除する．
-  - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json,locale.json`
+  - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\User\settings.json`
   - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\appdata\Code\languagepacks.json`
 - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\extensions\redhat.java-0.38.0\server\config_win`以下にキャッシュができる場合があるので削除する(config.ini以外はキャッシュ）
 - `C:\oit\javaYY\vscode-portable-win64-1.31.0-1\data\logs`フォルダを丸ごと削除

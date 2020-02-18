@@ -34,7 +34,7 @@ if [ "$#" -ge 1 ]; then
 fi
 
 # if VSHIST7Z are not generated within 30 minutes, archive logs
-if [ "$(find ${LOGDIR} -name \*.7z -mmin -30 | wc -l)" -eq 0 ] || [ "$FFLAG" = "--force" ]; then
+if [ "$(find "${LOGDIR}" -name \*.7z -mmin -30 | wc -l)" -eq 0 ] || [ "$FFLAG" = "--force" ]; then
   if [ -d "$VSHISTDIR" ]; then
     7za a "$VSHIST7Z" -y -bsp0 -bso0 "$VSHISTDIR" -sdel 2>/dev/null
     if [ $? -gt 0 ]; then
@@ -43,4 +43,4 @@ if [ "$(find ${LOGDIR} -name \*.7z -mmin -30 | wc -l)" -eq 0 ] || [ "$FFLAG" = "
   fi
 fi
 # delete 7z files older than 63 days
-find ${LOGDIR} -name \*.7z -daystart -mtime +62 | xargs rm -rf
+find "${LOGDIR}" -name \*.7z -daystart -mtime +62 | xargs rm -rf
