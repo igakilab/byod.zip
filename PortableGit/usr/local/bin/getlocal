@@ -25,10 +25,6 @@ if [ "$#" -ge 1 ]; then
             usage
             exit 0
             ;;
-        -v|-version)
-            echo 20191120
-            exit 0
-            ;;
         *)
             usage
             exit 1
@@ -38,7 +34,7 @@ fi
 
 id="`/usr/local/bin/oitname`" || exit 1
 rhost="`/usr/local/bin/kadaihost`"
-localdir="/home/teachers/t2015025/public_html/progjava/local"
+localdir="/home/teachers/t2015025/public_html/prog${CLASSNAME}/local"
 
 if [ $(echo $(expr $(date +%s) - $(sshrun date +%s) ) | tr -d '-') -gt 30 ]; then
   echo -e "${RB}時計がずれすぎているためgetlocalが失敗しました．${RE}Windowsの時計を正しく設定してから再実行してください"
@@ -48,7 +44,7 @@ fi
 echo "/usr/localを更新します．"
 rsync --timeout=15 -a --delete "${id}"@${rhost}:${localdir}/ /usr/local/
 
-profiledir="/home/teachers/t2015025/public_html/progjava/etc/profile.d"
+profiledir="/home/teachers/t2015025/public_html/prog${CLASSNAME}/etc/profile.d"
 echo "profile.dを更新します．"
 rsync --timeout=15 -a --delete "${id}"@${rhost}:${profiledir}/ /etc/profile.d/
 

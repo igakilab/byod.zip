@@ -7,7 +7,7 @@ usage(){
     cat <<-EOF
 	
 	使い方:
-	    getjava
+	    get${CLASSNAME}
 	
 	~/kadai/$COURSEYEAR/を更新する．
 	
@@ -38,18 +38,15 @@ fi
 
 id="`/usr/local/bin/oitname`" || exit 1
 rhost="`/usr/local/bin/kadaihost`"
-javadir="/home/teachers/t2015025/public_html/progjava/$COURSEYEAR/"
-
-# Hidden setting
-/c/Windows/System32/attrib.exe +H ~/kadai/${COURSEYEAR}/.log 1>> "$HISTFILE" 2>&1
+progdir="/home/teachers/t2015025/public_html/prog${CLASSNAME}/$COURSEYEAR/"
 
 if [ $(echo $(expr $(date +%s) - $(sshrun date +%s) ) | tr -d '-') -gt 30 ]; then
-  echo -e "${RB}時計がずれすぎているためgetjavaが失敗しました．${RE}Windowsの時計を正しく設定してから再実行してください"
+  echo -e "${RB}時計がずれすぎているためコマンドが失敗しました．${RE}Windowsの時計を正しく設定してから再実行してください"
   exit 2
 fi
 
 echo "~/kadai/${COURSEYEAR}/を更新します．"
-rsync --timeout=15 -a -zz "${id}"@${rhost}:${javadir} ~/kadai/${COURSEYEAR}/
+rsync --timeout=15 -a -zz "${id}"@${rhost}:${progdir} ~/kadai/${COURSEYEAR}/
 
 JSVERSION=`cat ~/kadai/$COURSEYEAR/.log/.version`\#`date +%s`
 echo ${JSVERSION} >> ~/kadai/$COURSEYEAR/.log/.version.history

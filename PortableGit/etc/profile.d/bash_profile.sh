@@ -10,16 +10,27 @@ if [ -e ~/.bashrc -a ! -e ~/.bash_profile -a ! -e ~/.bash_login -a ! -e ~/.profi
 	EOF
 fi
 
+export CLASSNAME=`/usr/local/bin/course -v`
+
 PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/core_perl:/usr/bin/vendor_perl
 export LANG="ja_JP.UTF-8"
 export COURSEYEAR=`/usr/local/bin/course`
 
-mkdir -p "$USERPROFILE/oithomes/java/kadai/$COURSEYEAR/.log/"
+mkdir -p "$USERPROFILE/oithomes/$CLASSNAME/kadai/$COURSEYEAR/.log/"
+
 export PATH=/c/oit/$COURSEYEAR/`/usr/local/bin/coursejdk`/bin/:$PATH
 export PATH=/c/oit/$COURSEYEAR/`/usr/local/bin/coursevscode`/:$PATH
-export HOME=$(cd "$USERPROFILE\oithomes\java" && pwd)
+export HOME=$(cd "$USERPROFILE\oithomes\\${CLASSNAME}" && pwd)
+
+# Hidden setting
+/c/Windows/System32/attrib.exe +H ~/kadai/${COURSEYEAR}/.log 1>> "$HISTFILE" 2>&1
 
 export HISTDATE=`date +'%Y%m'`
-export HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE"
+export HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.${CLASSNAME}_bash_history.$HISTDATE"
 HISTTIMEFORMAT="%Y/%m/%dT%T%z "
-export PROMPT_COMMAND='echo -e "res:$?\tpwd:$PWD" >> ~/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE;history -a'
+export PROMPT_COMMAND='echo -e "res:$?\tpwd:$PWD" >> ~/kadai/$COURSEYEAR/.log/.${CLASSNAME}_bash_history.$HISTDATE;history -a'
+
+# 古いjava_bash_historyはローカルから削除（2ヶ月以上前）
+this_month=`date +'%Y%m'`
+last_month=`date -d "${this_month}01 1 month ago" +'%Y%m'`
+find ~/kadai/`/usr/local/bin/course`/ -name ".${CLASSNAME}_bash_history*" -not -name ".${CLASSNAME}_bash_history.${this_month}" -not -name ".${CLASSNAME}_bash_history.${last_month}" -exec rm {} \;

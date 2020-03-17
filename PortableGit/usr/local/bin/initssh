@@ -4,7 +4,7 @@
 #
 # Author: Yasuharu Mizutani
 
-SSHKEY_COMMENT="java-byod_publickey"
+SSHKEY_COMMENT="${CLASSNAME}-byod_publickey"
 
 GB='\e[1;32m'
 GE='\e[m'
