@@ -1,8 +1,8 @@
 tempdir="/home/teachers/t2015025/byod"
+# date of every dir is set to $dirdate (for git clone)
 dirdate=20200101
+classname=java
 
-#rm -rf ~/public_html/progjava/local/bin/*
-#rm -rf ~/public_html/progjava/etc/*
 mkdir ${tempdir} && git -C ${tempdir} init
 git -C ${tempdir} config core.sparsecheckout true
 git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip.git
@@ -20,19 +20,13 @@ done
 
 find ~/byod/PortableGit/ -type d | xargs touch -d ${dirdate}
 
-mkdir -p ~/public_html/progjava/local/
+mkdir -p ~/public_html/prog${classname}/local/
 rsync --checksum -av --delete \
       --chmod=D755,F644   \
-      ${tempdir}/PortableGit/usr/local/bin ~/public_html/progjava/local/
+      ${tempdir}/PortableGit/usr/local/bin ~/public_html/prog${classname}/local/
 
 rsync --checksum -av --delete \
       --chmod=D755,F644   \
-      ${tempdir}/PortableGit/etc/profile.d ~/public_html/progjava/etc/
+      ${tempdir}/PortableGit/etc/profile.d ~/public_html/prog${classname}/etc/
 
-#mv ${tempdir}/PortableGit/usr/local/bin/ ~/public_html/progjava/local/
-#mv ${tempdir}/PortableGit/etc/profile.d/ ~/public_html/progjava/etc/
 rm -rf ${tempdir}
-#chmod 755 -R ~/public_html/progjava/local/
-#chmod 755 -R ~/public_html/progjava/etc/
-#find ~/public_html/progjava/local/ -type f -print | xargs chmod 644
-#find ~/public_html/progjava/etc/ -type f -print | xargs chmod 644
