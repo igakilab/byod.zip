@@ -12,7 +12,7 @@ func main() {
 	uprofile := os.Getenv("USERPROFILE")
 	workhome := uprofile + `\oithomes\java`
         os.Chdir(workhome)
-	cmd := exec.Command(`C:\oit\java20\PortableGit-2.24.1.2-64\usr\bin\mintty.exe`,`-i`,`C:\oit\java20\java-bash.ico`,`C:\oit\java20\PortableGit-2.24.1.2-64\usr\bin\bash.exe`, `--login`, `-i`)
+	cmd := exec.Command(`C:\oit\java20\PortableGit-2.25.0-64\usr\bin\mintty.exe`,`-i`,`C:\oit\java20\PortableGit-2.25.0-64\java-bash.ico`,`C:\oit\java20\PortableGit-2.25.0-64\usr\bin\bash.exe`, `--login`, `-i`)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
