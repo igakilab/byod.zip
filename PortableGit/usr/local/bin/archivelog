@@ -1,8 +1,7 @@
 #!/bin/bash
 #
 # Written by Hiroshi Igaki.
-
-HISTFILE=~/kadai/$COURSEYEAR/.log/.java_bash_history.$HISTDATE
+HISTFILE="$HOME/kadai/$COURSEYEAR/.log/.${CLASSNAME}_bash_history.$HISTDATE"
 LOGDIR=~/kadai/$COURSEYEAR/.log/
 VSHISTDIR="${LOGDIR}.history/"
 VSHIST7Z="${LOGDIR}.hist`date "+%Y%m%d%H%M%S"`.7z"
