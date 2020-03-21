@@ -5,7 +5,7 @@ classname=java
 
 mkdir ${tempdir} && git -C ${tempdir} init
 git -C ${tempdir} config core.sparsecheckout true
-git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip.git
+git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip_isdev.git
 echo /PortableGit/usr/local/bin/ > ${tempdir}/.git/info/sparse-checkout
 echo /PortableGit/etc/ >> ${tempdir}/.git/info/sparse-checkout
 git -C ${tempdir} pull origin master
@@ -27,6 +27,6 @@ rsync --checksum -av --delete \
 
 rsync --checksum -av --delete \
       --chmod=D755,F644   \
-      ${tempdir}/PortableGit/etc/profile.d ~/public_html/prog${classname}/etc/
+      ${tempdir}/PortableGit/etc/ ~/public_html/prog${classname}/etc/
 
 rm -rf ${tempdir}

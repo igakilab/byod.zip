@@ -1,9 +1,9 @@
 [core]
 	symlinks = false
-	autocrlf = input
+	autocrlf = false
 	ignorecase = true
 	quotepath = false
-	safecrlf = true
+	safecrlf = false
 [color]
 	diff = auto
 	status = auto
