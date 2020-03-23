@@ -5,7 +5,7 @@ classname=java
 
 mkdir ${tempdir} && git -C ${tempdir} init
 git -C ${tempdir} config core.sparsecheckout true
-git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip_isdev.git
+git -C ${tempdir} remote add origin https://github.com/igakilab/byod.zip.git
 echo /PortableGit/usr/local/bin/ > ${tempdir}/.git/info/sparse-checkout
 echo /PortableGit/etc/ >> ${tempdir}/.git/info/sparse-checkout
 git -C ${tempdir} pull origin master
